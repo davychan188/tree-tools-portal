@@ -1,271 +1,219 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-HK">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="樹木工具統一入口 — HA TRAM、Audit PDF、本地 auditapp 與 referral cases" />
-  <title>樹木工具統一入口</title>
-  <style>
-    :root {
-      --bg: #f4f7f4;
-      --card: #ffffff;
-      --text: #1a2e1a;
-      --muted: #5a6b5a;
-      --accent: #2d6a4f;
-      --accent-soft: #d8f3dc;
-      --border: #c8d9c8;
-      --local-bg: #f8faf8;
-      --shadow: 0 8px 24px rgba(45, 106, 79, 0.08);
-      --radius: 16px;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei",
-        "Segoe UI", system-ui, -apple-system, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(ellipse at top left, #e9f5ec 0%, transparent 50%),
-        radial-gradient(ellipse at bottom right, #eef6f0 0%, transparent 45%),
-        var(--bg);
-      line-height: 1.55;
-    }
-
-    .wrap {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2.5rem 1.25rem 3rem;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .badge {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--accent);
-      background: var(--accent-soft);
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      margin-bottom: 0.85rem;
-    }
-
-    h1 {
-      margin: 0 0 0.5rem;
-      font-size: clamp(1.6rem, 4vw, 2.1rem);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .subtitle {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.1rem;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1.35rem 1.25rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    a.card {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    a.card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(45, 106, 79, 0.14);
-      border-color: #9fbf9f;
-    }
-
-    a.card:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .card.local {
-      background: var(--local-bg);
-      cursor: default;
-    }
-
-    .card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.75rem;
-    }
-
-    .icon {
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-
-    .tag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: none;
-      padding: 0.28rem 0.55rem;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-
-    .tag.web {
-      color: #0b5d3a;
-      background: #d8f3dc;
-    }
-
-    .tag.local-exe {
-      color: #6b4f1d;
-      background: #f7e8c8;
-    }
-
-    .tag.local-py {
-      color: #1d4a6b;
-      background: #d6e8f7;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 1.12rem;
-      font-weight: 700;
-    }
-
-    .note {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-      flex-grow: 1;
-    }
-
-    .meta {
-      margin: 0;
-      font-size: 0.82rem;
-      color: var(--accent);
-      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-      word-break: break-all;
-    }
-
-    .cta {
-      margin-top: 0.25rem;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    a.card .cta::after {
-      content: " →";
-    }
-
-    .local-hint {
-      margin: 0;
-      font-size: 0.85rem;
-      color: var(--muted);
-      background: #eef3ee;
-      border-radius: 10px;
-      padding: 0.55rem 0.7rem;
-    }
-
-    footer {
-      margin-top: 2.5rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>樹木工具統一入口</title>
+<style>
+  :root {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --accent: #1a7f37;
+    --accent-light: #e6f4ea;
+    --text: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang HK", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 {
+    font-size: 1.35rem;
+    font-weight: 650;
+    margin-bottom: 12px;
+  }
+  .search-wrap {
+    position: relative;
+    max-width: 520px;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 10px 14px 10px 38px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23656d76' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0'/%3E%3C/svg%3E") no-repeat 12px center;
+  }
+  .search-wrap input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(26,127,55,.15);
+  }
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .card:hover {
+    border-color: #afb8c1;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  }
+  .card h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .card .tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    width: fit-content;
+  }
+  .card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    flex: 1;
+  }
+  .card a, .card button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+    padding: 8px 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  .card a:hover, .card button:hover { background: #166a2e; }
+  .card .note {
+    font-size: 0.78rem;
+    color: #8b949e;
+    margin-top: 2px;
+  }
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 16px;
+  }
+  footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #8b949e;
+    padding: 16px;
+  }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="badge">Tree Tools Hub</div>
-      <h1>樹木工具統一入口</h1>
-      <p class="subtitle">HA 樹木相關網上工具與本機工具一覽</p>
-    </header>
-
-    <main class="grid">
-      <a class="card" href="https://davychan188.github.io/tree-inventory-check/" target="_blank" rel="noopener noreferrer">
-        <div class="card-top">
-          <div class="icon" aria-hidden="true">🌳</div>
-          <span class="tag web">網上工具</span>
-        </div>
-        <h2>HA TRAM Checking</h2>
-        <p class="note">TRAM / tree inventory Excel 檢查與對比（網上工具）</p>
-        <p class="cta">開啟工具</p>
-      </a>
-
-      <a class="card" href="https://davychan188.github.io/audit-pdf-to-excel/" target="_blank" rel="noopener noreferrer">
-        <div class="card-top">
-          <div class="icon" aria-hidden="true">📄</div>
-          <span class="tag web">網上工具</span>
-        </div>
-        <h2>HA Audit PDF → Excel</h2>
-        <p class="note">Audit Report PDF 轉 Excel／複製表格（網上工具）</p>
-        <p class="cta">開啟工具</p>
-      </a>
-
-      <div class="card local" aria-disabled="true">
-        <div class="card-top">
-          <div class="icon" aria-hidden="true">💻</div>
-          <span class="tag local-exe">本機工具 · EXE</span>
-        </div>
-        <h2>Upload monthly auditapp</h2>
-        <p class="note">每月 audit 照片上載／處理應用（需在本機執行）</p>
-        <p class="meta">TY_TNS_Monthly_photos</p>
-        <p class="local-hint">本地桌面 EXE，沒有網上連結。請於本機直接執行該程式。</p>
-      </div>
-
-      <div class="card local" aria-disabled="true">
-        <div class="card-top">
-          <div class="icon" aria-hidden="true">🐍</div>
-          <span class="tag local-py">本機工具 · Python</span>
-        </div>
-        <h2>referral cases</h2>
-        <p class="note">轉介個案對比工具（本地 Python 腳本）</p>
-        <p class="meta">compare_tree_cases.py</p>
-        <p class="local-hint">本地 Python 對比工具，沒有網上連結。請於本機執行該腳本。</p>
-      </div>
-    </main>
-
-    <footer>
-      託管於 GitHub Pages ·
-      <a href="https://github.com/davychan188/tree-tools-portal" target="_blank" rel="noopener noreferrer">davychan188/tree-tools-portal</a>
-    </footer>
+<header>
+  <h1>樹木工具統一入口</h1>
+  <div class="search-wrap">
+    <input id="q" type="search" placeholder="搜尋工具名稱、關鍵字…" autofocus>
   </div>
+</header>
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+<footer>雙擊或開啟此 HTML 即可使用 · 資料僅儲存在你的瀏覽器</footer>
+
+<script>
+const tools = [
+  {
+    id: "ha-tram",
+    name: "HA TRAM Checking",
+    tag: "網頁工具",
+    desc: "樹木盤點 Excel 自動檢查／年份對比。單檔檢查或舊年 vs 新年對比，可下載 Excel summary。",
+    url: "https://davychan188.github.io/tree-inventory-check/",
+    keywords: "tram checking inventory excel 對比 檢查 盤點"
+  },
+  {
+    id: "ha-audit",
+    name: "HA · Audit PDF → Excel",
+    tag: "網頁工具",
+    desc: "Audit Report PDF 轉 Excel。支援 TNS（Audit）及 Tree Removal Summary，複製無表頭，可一次拖多份 PDF。",
+    url: "https://davychan188.github.io/audit-pdf-to-excel/",
+    keywords: "audit pdf excel tns removal summary 轉換 報告"
+  },
+  {
+    id: "monthly-audit",
+    name: "Upload Monthly Audit App（TY / TNS）",
+    tag: "本地 EXE",
+    desc: "每月 Audit 報告產生工具（TY_TNS_Monthly_photos）。上傳樹木相片產生 Word 報告，支援日期時間戳、屋邨自動辨識。",
+    note: "本地工具：用 build_TY_TNS.bat 打包成 EXE",
+    keywords: "monthly audit ty tns 報告 相片 upload exe bat"
+  },
+  {
+    id: "referral",
+    name: "Referral Cases 對比",
+    tag: "本地工具",
+    desc: "以 Case No. + Tree ID 對比兩份 Excel。支援 KC/WTT 或 Summary 表，輸出 Only A/B、內容差異、逾期、Dead tree、高風險。",
+    note: "本地工具：compare_tree_cases.py",
+    keywords: "referral cases compare kc wtt case no tree id 對比"
+  }
+];
+
+const grid = document.getElementById("grid");
+const q = document.getElementById("q");
+
+function render(list) {
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty">沒有符合「${q.value.trim()}」的工具</div>`;
+    return;
+  }
+  grid.innerHTML = list.map(t => `
+    <article class="card" data-id="${t.id}">
+      <span class="tag">${t.tag}</span>
+      <h2>${t.name}</h2>
+      <p>${t.desc}</p>
+      ${t.note ? `<div class="note">${t.note}</div>` : ""}
+      ${t.url
+        ? `<a href="${t.url}" target="_blank" rel="noopener">開啟工具</a>`
+        : `<button onclick="alert('此為本地工具。\\n請使用對應的 .py 或打包好的 EXE。')">查看說明</button>`
+      }
+    </article>
+  `).join("");
+}
+
+function filter() {
+  const s = q.value.trim().toLowerCase();
+  if (!s) return render(tools);
+  const hit = tools.filter(t =>
+    (t.name + " " + t.desc + " " + (t.keywords || "") + " " + (t.note || "")).toLowerCase().includes(s)
+  );
+  render(hit);
+}
+
+q.addEventListener("input", filter);
+render(tools);
+</script>
 </body>
 </html>
