@@ -76,7 +76,6 @@
   }
   .card:hover {
     border-color: #afb8c1;
-    box-shadow: 0 4px 12px rgba(0,0,0,.08);
   }
   .card h2 {
     font-size: 1.05rem;
@@ -114,11 +113,22 @@
     width: 100%;
   }
   .card a:hover, .card button:hover { background: #166a2e; }
-  .card .note {
+  .note {
     font-size: 0.78rem;
     color: #8b949e;
     margin-top: 2px;
   }
+  .detail {
+    display: none;
+    background: #f6f8fa;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    color: #24292f;
+    margin-top: 4px;
+    line-height: 1.45;
+  }
+  .detail.show { display: block; }
   .empty {
     grid-column: 1 / -1;
     text-align: center;
@@ -168,7 +178,7 @@ const tools = [
     name: "Upload Monthly Audit App（TY / TNS）",
     tag: "本地 EXE",
     desc: "每月 Audit 報告產生工具（TY_TNS_Monthly_photos）。上傳樹木相片產生 Word 報告，支援日期時間戳、屋邨自動辨識。",
-    note: "本地工具：用 build_TY_TNS.bat 打包成 EXE",
+    detail: "本地工具。請用 build_TY_TNS.bat 打包成 EXE，然後執行 TY_TNS_Monthly_photos.exe。需要 Python + PyInstaller 環境。",
     keywords: "monthly audit ty tns 報告 相片 upload exe bat"
   },
   {
@@ -176,7 +186,7 @@ const tools = [
     name: "Referral Cases 對比",
     tag: "本地工具",
     desc: "以 Case No. + Tree ID 對比兩份 Excel。支援 KC/WTT 或 Summary 表，輸出 Only A/B、內容差異、逾期、Dead tree、高風險。",
-    note: "本地工具：compare_tree_cases.py",
+    detail: "本地工具。直接執行 compare_tree_cases.py（需要安裝 openpyxl）。可選擇 A/B 公司 Excel 檔，產生差異報告。",
     keywords: "referral cases compare kc wtt case no tree id 對比"
   }
 ];
@@ -194,20 +204,25 @@ function render(list) {
       <span class="tag">${t.tag}</span>
       <h2>${t.name}</h2>
       <p>${t.desc}</p>
-      ${t.note ? `<div class="note">${t.note}</div>` : ""}
       ${t.url
         ? `<a href="${t.url}" target="_blank" rel="noopener">開啟工具</a>`
-        : `<button onclick="alert('此為本地工具。\\n請使用對應的 .py 或打包好的 EXE。')">查看說明</button>`
+        : `<button onclick="toggleDetail('${t.id}')">查看說明</button>
+           <div class="detail" id="detail-${t.id}">${t.detail || ""}</div>`
       }
     </article>
   `).join("");
+}
+
+function toggleDetail(id) {
+  const el = document.getElementById("detail-" + id);
+  if (el) el.classList.toggle("show");
 }
 
 function filter() {
   const s = q.value.trim().toLowerCase();
   if (!s) return render(tools);
   const hit = tools.filter(t =>
-    (t.name + " " + t.desc + " " + (t.keywords || "") + " " + (t.note || "")).toLowerCase().includes(s)
+    (t.name + " " + t.desc + " " + (t.keywords || "") + " " + (t.detail || "")).toLowerCase().includes(s)
   );
   render(hit);
 }
