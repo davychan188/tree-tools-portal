@@ -1,4 +1,4 @@
-const CACHE = "tree-tools-portal-v2";
+const CACHE = "tree-tools-portal-v3";
 const ASSETS = [
   "./",
   "./index.html",
